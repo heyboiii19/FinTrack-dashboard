@@ -124,6 +124,12 @@ export default function Dashboard() {
         </div>
 
         <TransactionTable />
+
+        <footer className="pb-2 text-center">
+          <p className="text-base font-bold tracking-wide text-slate-800 dark:text-slate-100 sm:text-lg">
+            Developed by- Aditya Tiwari
+          </p>
+        </footer>
       </div>
     </main>
   )
