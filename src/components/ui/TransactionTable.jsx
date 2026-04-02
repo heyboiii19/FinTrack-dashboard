@@ -112,22 +112,24 @@ export default function TransactionTable() {
   }
 
   return (
-    <section className="glass-panel overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 shadow-[0_30px_70px_-36px_rgba(15,23,42,0.38)]">
+    <section className="glass-panel overflow-hidden rounded-[2rem] border border-white/70 bg-white/82 shadow-[0_30px_70px_-36px_rgba(15,23,42,0.38)] transition-colors duration-300 dark:border-slate-800/70 dark:bg-slate-900/78 dark:shadow-[0_30px_70px_-36px_rgba(2,6,23,0.85)]">
       <div className="flex flex-col gap-4 border-b border-slate-200/80 px-5 py-6 sm:px-6">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-medium text-slate-500">Transactions</p>
-            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-slate-950">
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+              Transactions
+            </p>
+            <h2 className="text-3xl font-semibold tracking-[-0.03em] text-slate-950 dark:text-white">
               Recent Activity
             </h2>
-            <p className="max-w-2xl text-sm leading-6 text-slate-500">
+            <p className="max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400">
               Browse the latest income and expense entries with role-aware
               visibility and category filtering.
             </p>
           </div>
 
           <div className="flex flex-col gap-3 sm:items-end">
-            <div className="inline-flex w-fit rounded-full border border-slate-200/80 bg-slate-50/90 px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm">
+            <div className="inline-flex w-fit rounded-full border border-slate-200/80 bg-slate-50/90 px-3 py-1.5 text-sm font-medium text-slate-600 shadow-sm transition-colors duration-300 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
               {tableSummary}
             </div>
 
@@ -147,7 +149,7 @@ export default function TransactionTable() {
                       key={option.key}
                       type="button"
                       onClick={() => handleDownload(option)}
-                      className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                      className="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
                     >
                       {option.label}
                     </button>
@@ -161,17 +163,19 @@ export default function TransactionTable() {
 
       {filteredTransactions.length === 0 ? (
         <div className="px-5 py-14 sm:px-6">
-          <div className="mx-auto flex max-w-md flex-col items-center justify-center rounded-[1.5rem] border border-slate-200/80 bg-slate-50/90 px-6 py-10 text-center shadow-sm">
-            <p className="text-base font-semibold text-slate-700">{emptyTitle}</p>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
+          <div className="mx-auto flex max-w-md flex-col items-center justify-center rounded-[1.5rem] border border-slate-200/80 bg-slate-50/90 px-6 py-10 text-center shadow-sm transition-colors duration-300 dark:border-slate-700 dark:bg-slate-800/70">
+            <p className="text-base font-semibold text-slate-700 dark:text-slate-100">
+              {emptyTitle}
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
               {emptyMessage}
             </p>
           </div>
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full text-left text-sm text-slate-600">
-            <thead className="bg-slate-50/95 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+          <table className="min-w-full text-left text-sm text-slate-600 dark:text-slate-300">
+            <thead className="bg-slate-50/95 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:bg-slate-800/80 dark:text-slate-400">
               <tr>
                 <th className="px-5 py-4 sm:px-6">Date</th>
                 <th className="px-5 py-4 sm:px-6">Amount</th>
@@ -179,13 +183,13 @@ export default function TransactionTable() {
                 <th className="px-5 py-4 sm:px-6">Type</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200/70">
+            <tbody className="divide-y divide-slate-200/70 dark:divide-slate-800">
               {filteredTransactions.map((transaction) => (
                 <tr
                   key={transaction.id}
-                  className="odd:bg-white even:bg-slate-50/70 transition-colors duration-300 ease-out hover:bg-sky-50/90"
+                  className="odd:bg-white even:bg-slate-50/70 transition-colors duration-300 ease-out hover:bg-sky-50/90 dark:odd:bg-slate-900/45 dark:even:bg-slate-800/60 dark:hover:bg-slate-800/95"
                 >
-                  <td className="whitespace-nowrap px-5 py-4 font-medium text-slate-700 sm:px-6">
+                  <td className="whitespace-nowrap px-5 py-4 font-medium text-slate-700 dark:text-slate-200 sm:px-6">
                     {formatDate(transaction.date)}
                   </td>
                   <td
@@ -198,7 +202,7 @@ export default function TransactionTable() {
                     {formatAmount(transaction.amount, transaction.type)}
                   </td>
                   <td className="whitespace-nowrap px-5 py-4 sm:px-6">
-                    <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">
+                    <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200">
                       {transaction.category}
                     </span>
                   </td>
@@ -206,8 +210,8 @@ export default function TransactionTable() {
                     <span
                       className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold shadow-sm ${
                         transaction.type === 'income'
-                          ? 'bg-emerald-50 text-emerald-700'
-                          : 'bg-rose-50 text-rose-700'
+                          ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300'
+                          : 'bg-rose-50 text-rose-700 dark:bg-rose-500/15 dark:text-rose-300'
                       }`}
                     >
                       {transaction.type}

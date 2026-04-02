@@ -48,11 +48,13 @@ const useFinanceStore = create(
   persist(
     (set) => ({
       role: 'admin',
+      theme: 'light',
       transactions: sampleTransactions,
       filters: {
         category: 'All',
       },
       setRole: (role) => set({ role }),
+      setTheme: (theme) => set({ theme }),
       setFilter: (category) =>
         set((state) => ({
           filters: {
@@ -64,6 +66,7 @@ const useFinanceStore = create(
     {
       name: 'fintrack-store',
       partialize: (state) => ({
+        theme: state.theme,
         transactions: state.transactions,
       }),
     }
